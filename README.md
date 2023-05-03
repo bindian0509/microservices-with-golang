@@ -94,3 +94,22 @@ Date: Tue, 22 Aug 2023 13:26:37 GMT
     }
 ]
 ```
+### Testing customer API endpoint (POST)
+
+- To create a new customer
+    - `http POST :8080/customers firstName=John lastName=Reese emailAddress="john@root.com" phoneNumber="515-555-1235" address="36 ChinaTown, Borivali East, Mumbi, MH, INDIA"`
+```shell
+    HTTP/1.1 201 Created
+    Content-Length: 210
+    Content-Type: application/json; charset=UTF-8
+    Date: Tue, 22 Aug 2023 18:28:38 GMT
+
+    {
+        "address": "36 ChinaTown, Borivali East, Mumbi, MH, INDIA",
+        "customerId": "68fb0b27-1e9a-4ce8-81ac-f41cc1e3f5d6",
+        "emailAddress": "john@root.com",
+        "firstName": "John",
+        "lastName": "Reese",
+        "phoneNumber": "515-555-1235"
+    }
+```

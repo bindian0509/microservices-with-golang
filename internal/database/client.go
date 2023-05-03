@@ -13,9 +13,14 @@ import (
 
 type DatabaseClient interface {
 	Ready() bool
+
 	GetAllCustomers(ctx context.Context, emailAddress string) ([]models.Customer, error)
+	AddCustomer(ctx context.Context, customer *models.Customer) (*models.Customer, error)
+
 	GetAllServices(ctx context.Context) ([]models.Service, error)
+
 	GetAllProducts(ctx context.Context, vendorID string) ([]models.Product, error)
+
 	GetAllVendors(ctx context.Context) ([]models.Vendor, error)
 }
 
