@@ -5,6 +5,10 @@ CREATE TABLE wisdom.services (
   price NUMERIC(12,2)
 );
 
+ALTER TABLE wisdom.services
+ADD COLUMN created_at TIMESTAMP DEFAULT NOW(),
+ADD COLUMN updated_at TIMESTAMP DEFAULT NOW();
+
 CREATE TABLE wisdom.customers (
    customer_id UUID PRIMARY KEY,
    first_name VARCHAR,
