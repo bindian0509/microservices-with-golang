@@ -16,6 +16,7 @@ type Server interface {
 
 	GetAllCustomers(ctx echo.Context) error
 	AddCustomer(ctx echo.Context) error
+	GetCustomerById(ctx echo.Context) error
 
 	GetAllServices(ctx echo.Context) error
 	AddService(ctx echo.Context) error
@@ -56,6 +57,7 @@ func (s *EchoServer) registerRoutes() {
 	cg := s.echo.Group("/customers")
 	cg.GET("", s.GetAllCustomers)
 	cg.POST("", s.AddCustomer)
+	cg.GET("/:id", s.GetCustomerById)
 
 	sg := s.echo.Group("/services")
 	sg.GET("", s.GetAllServices)
