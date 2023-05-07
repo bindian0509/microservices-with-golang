@@ -113,3 +113,21 @@ Date: Tue, 22 Aug 2023 13:26:37 GMT
         "phoneNumber": "515-555-1235"
     }
 ```
+### Testing customer API endpoint for `customerId` (GET)
+- To get customer with `customerId`
+    - `http :8080/customers/8db81915-7955-47ac-abf1-fa3a3f27e0a3`
+```shell
+    HTTP/1.1 200 OK
+    Content-Length: 225
+    Content-Type: application/json; charset=UTF-8
+    Date: Wed, 23 Aug 2023 11:10:49 GMT
+
+    {
+        "address": "4829 Badeau Parkway, Chattanooga, TN 37405",
+        "customerId": "8db81915-7955-47ac-abf1-fa3a3f27e0a3",
+        "emailAddress": "nibh@ultricesposuere.edu",
+        "firstName": "Sydney",
+        "lastName": "Bartlett",
+        "phoneNumber": "(982) 231-7357"
+    }
+```
