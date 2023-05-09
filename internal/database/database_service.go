@@ -37,7 +37,7 @@ func (c Client) GetServiceById(ctx context.Context, ID string) (*models.Service,
 		First(&service)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
-			return nil, &dberrors.NotFoundError{Entity: "service", ID: ID}
+			return nil, &db_errors.NotFoundError{Entity: "service", ID: ID}
 		}
 		return nil, result.Error
 	}
