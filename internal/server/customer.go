@@ -2,7 +2,6 @@ package server
 
 import (
 	"net/http"
-
 	"github.com/bindian0509/microservices-with-golang/internal/db_errors"
 	"github.com/bindian0509/microservices-with-golang/internal/models"
 	"github.com/labstack/echo/v4"
@@ -44,6 +43,31 @@ func (s *EchoServer) GetCustomerById(ctx echo.Context) error {
 		switch err.(type) {
 		case *db_errors.NotFoundError:
 			return ctx.JSON(http.StatusNotFound, err)
+		default:
+			return ctx.JSON(http.StatusInternalServerError, err)
+		}
+	}
+	return ctx.JSON(http.StatusOK, customer)
+}
+
+
+func (s *EchoServer) UpdateCustomer(ctx echo.Context) error {
+	ID := ctx.Param("id")
+	customer := new(models.Customer)
+	if err := ctx.Bind(customer); err != nil {
+		return ctx.JSON(http.StatusUnsupportedMediaType, err)
+	}
+	if ID != customer.CustomerID {
+		return ctx.JSON(http.StatusBadRequest, "id on path doesn't match id on body")
+	}
+	
+	customer, err := s.DB.UpdateCustomer(ctx.Request().Context(), customer)
+	if err != nil {
+		switch err.(type) {
+		case *db_errors.NotFoundError:
+			return ctx.JSON(http.StatusNotFound, err)
+		case *db_errors.ConflictError:
+			return ctx.JSON(http.StatusConflict, err)
 		default:
 			return ctx.JSON(http.StatusInternalServerError, err)
 		}

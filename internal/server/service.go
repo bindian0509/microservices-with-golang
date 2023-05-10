@@ -50,3 +50,26 @@ func (s *EchoServer) GetServiceById(ctx echo.Context) error {
 	}
 	return ctx.JSON(http.StatusOK, service)
 }
+
+func (s *EchoServer) UpdateService(ctx echo.Context) error {
+	ID := ctx.Param("id")
+	service := new(models.Service)
+	if err := ctx.Bind(service); err != nil {
+		return ctx.JSON(http.StatusUnsupportedMediaType, err)
+	}
+	if ID != service.ServiceID {
+		return ctx.JSON(http.StatusBadRequest, "id on path doesn't match id on body")
+	}
+	service, err := s.DB.UpdateService(ctx.Request().Context(), service)
+	if err != nil {
+		switch err.(type) {
+		case *db_errors.NotFoundError:
+			return ctx.JSON(http.StatusNotFound, err)
+		case *db_errors.ConflictError:
+			return ctx.JSON(http.StatusConflict, err)
+		default:
+			return ctx.JSON(http.StatusInternalServerError, err)
+		}
+	}
+	return ctx.JSON(http.StatusOK, service)
+}
