@@ -3,7 +3,7 @@ package database
 import (
 	"context"
 	"errors"
-
+	"time"
 	"github.com/bindian0509/microservices-with-golang/internal/db_errors"
 	"github.com/bindian0509/microservices-with-golang/internal/models"
 	"github.com/google/uuid"
@@ -54,6 +54,7 @@ func (c Client) UpdateService(ctx context.Context, service *models.Service) (*mo
 		Updates(models.Service{
 			Name:  service.Name,
 			Price: service.Price,
+			UpdatedAt: time.Now(),
 		})
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrDuplicatedKey) {
