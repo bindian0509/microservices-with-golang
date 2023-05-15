@@ -32,6 +32,7 @@ type Server interface {
 	GetAllVendors(ctx echo.Context) error
 	AddVendor(ctx echo.Context) error
 	GetVendorById(ctx echo.Context) error
+	UpdateVendor(ctx echo.Context) error
 }
 
 type EchoServer struct {
@@ -83,6 +84,7 @@ func (s *EchoServer) registerRoutes() {
 	vg.GET("", s.GetAllVendors)
 	vg.POST("", s.AddVendor)
 	vg.GET("/:id", s.GetVendorById)
+	vg.PUT("/:id", s.UpdateVendor)
 }
 
 func (s *EchoServer) Readiness(ctx echo.Context) error {
