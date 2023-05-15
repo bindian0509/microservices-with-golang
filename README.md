@@ -51,7 +51,7 @@ A simple microservice in go with postgres as database
         "status": "OK"
     }
     ```
-### Testing customer API endpoint (GET)
+### Testing Get All customer API endpoint (GET)
 - To get all customers
     - `http :8080/customers`
 ```shell
@@ -75,7 +75,7 @@ A simple microservice in go with postgres as database
     ...
 ]
 ```
-- To get customer with emailAddress
+- To get customer from emailAddress (search API) (GET)
     - `http :8080/customers emailAddress=="magna.Phasellus@Phasellus.net"`
 ```shell
 HTTP/1.1 200 OK
@@ -94,7 +94,7 @@ Date: Tue, 22 Aug 2023 13:26:37 GMT
     }
 ]
 ```
-### Testing customer API endpoint (POST)
+### Testing create customer API endpoint (POST)
 
 - To create a new customer
     - `http POST :8080/customers firstName=John lastName=Reese emailAddress="john@root.com" phoneNumber="515-555-1235" address="36 ChinaTown, Borivali East, Mumbi, MH, INDIA"`
@@ -113,7 +113,7 @@ Date: Tue, 22 Aug 2023 13:26:37 GMT
         "phoneNumber": "515-555-1235"
     }
 ```
-### Testing customer API endpoint for `customerId` (GET)
+### Testing Get customer from Id API endpoint (GET)
 - To get customer with `customerId`
     - `http :8080/customers/8db81915-7955-47ac-abf1-fa3a3f27e0a3`
 ```shell
@@ -129,5 +129,24 @@ Date: Tue, 22 Aug 2023 13:26:37 GMT
         "firstName": "Sydney",
         "lastName": "Bartlett",
         "phoneNumber": "(982) 231-7357"
+    }
+```
+
+### Testing Update customer API endpoint (PUT)
+- To update customer with `customerId`
+    - `http PUT :8080/customers/e2579031-41f8-4c1b-851d-d05dd0327230 address="556 Lakewood Park, Bismarck, ND 58505" customerId="e2579031-41f8-4c1b-851d-d05dd0327230" emailAddress="penatibus.et@lectusa.com" firstName="Ryan" lastName="Reynolds" phoneNumber="(901) 166-8355"`
+```shell
+    HTTP/1.1 200 OK
+    Content-Length: 218
+    Content-Type: application/json; charset=UTF-8
+    Date: Fri, 25 Aug 2023 19:04:49 GMT
+
+    {
+        "address": "556 Lakewood Park, Bismarck, ND 58505",
+        "customerId": "e2579031-41f8-4c1b-851d-d05dd0327230",
+        "emailAddress": "penatibus.et@lectusa.com",
+        "firstName": "Ryan",
+        "lastName": "Reynolds",
+        "phoneNumber": "(901) 166-8355"
     }
 ```
