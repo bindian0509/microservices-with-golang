@@ -60,7 +60,7 @@ func (s *EchoServer) UpdateCustomer(ctx echo.Context) error {
 	if ID != customer.CustomerID {
 		return ctx.JSON(http.StatusBadRequest, "id on path doesn't match id on body")
 	}
-	
+
 	customer, err := s.DB.UpdateCustomer(ctx.Request().Context(), customer)
 	if err != nil {
 		switch err.(type) {
@@ -73,4 +73,13 @@ func (s *EchoServer) UpdateCustomer(ctx echo.Context) error {
 		}
 	}
 	return ctx.JSON(http.StatusOK, customer)
+}
+
+func (s *EchoServer) DeleteCustomer(ctx echo.Context) error {
+	ID := ctx.Param("id")
+	err := s.DB.DeleteCustomer(ctx.Request().Context(), ID)
+	if err != nil {
+		return ctx.JSON(http.StatusInternalServerError, err)
+	}
+	return ctx.NoContent(http.StatusResetContent)
 }
