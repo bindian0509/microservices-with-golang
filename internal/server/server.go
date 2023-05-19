@@ -30,6 +30,7 @@ type Server interface {
 	AddService(ctx echo.Context) error
 	GetServiceById(ctx echo.Context) error
 	UpdateService(ctx echo.Context) error
+	DeleteService(ctx echo.Context) error
 
 	GetAllVendors(ctx echo.Context) error
 	AddVendor(ctx echo.Context) error
@@ -84,6 +85,7 @@ func (s *EchoServer) registerRoutes() {
 	sg.POST("", s.AddService)
 	sg.GET("/:id", s.GetServiceById)
 	sg.PUT("/:id", s.UpdateService)
+	sg.DELETE("/:id", s.DeleteService)
 
 
 	vg := s.echo.Group("/vendors")
