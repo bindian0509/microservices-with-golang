@@ -150,3 +150,12 @@ Date: Tue, 22 Aug 2023 13:26:37 GMT
         "phoneNumber": "(901) 166-8355"
     }
 ```
+
+### Testing Delete customer API endpoint (DELETE)
+- To update customer with `customerId`
+    - `http DELETE :8080/customers/8db81915-7955-47ac-abf1-fa3a3f27e0a3`
+```shell
+    HTTP/1.1 205 Reset Content
+    Content-Length: 0
+    Date: Fri, 25 Aug 2023 19:31:23 GMT
+```
