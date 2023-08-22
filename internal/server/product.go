@@ -8,9 +8,8 @@ import (
 
 
 func (s *EchoServer) GetAllProducts(ctx echo.Context) error {
-	VendorID := ctx.QueryParam("vendorId")
-
-	products, err := s.DB.GetAllProducts(ctx.Request().Context(), VendorID)
+	vendorID := ctx.QueryParam("vendorId")
+	products, err := s.DB.GetAllProducts(ctx.Request().Context(), vendorID)
 	if err != nil {
 		return ctx.JSON(http.StatusInternalServerError, err)
 	}
