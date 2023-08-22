@@ -33,7 +33,8 @@ A simple microservice in go with postgres as database
 - Insert data to the database via data.sql
     - `psql -U postgres -f data.sql`
 
-## Run the microservice
+## Tesing Microservices
+### Checking the database connection and liveness probe
 - To start the server
     - `go run main.go`
 - To check everything is working fine
@@ -50,3 +51,46 @@ A simple microservice in go with postgres as database
         "status": "OK"
     }
     ```
+### Testing customer API endpoint (GET)
+- To get all customers
+    - `http :8080/customers`
+```shell
+[
+    {
+        "address": "556 Lakewood Park, Bismarck, ND 58505",
+        "customerId": "e2579031-41f8-4c1b-851d-d05dd0327230",
+        "emailAddress": "penatibus.et@lectusa.com",
+        "firstName": "Cally",
+        "lastName": "Reynolds",
+        "phoneNumber": "(901) 166-8355"
+    },
+    {
+        "address": "4829 Badeau Parkway, Chattanooga, TN 37405",
+        "customerId": "8db81915-7955-47ac-abf1-fa3a3f27e0a3",
+        "emailAddress": "nibh@ultricesposuere.edu",
+        "firstName": "Sydney",
+        "lastName": "Bartlett",
+        "phoneNumber": "(982) 231-7357"
+    },
+    ...
+]
+```
+- To get customer with emailAddress
+    - `http :8080/customers emailAddress=="magna.Phasellus@Phasellus.net"`
+```shell
+HTTP/1.1 200 OK
+Content-Length: 223
+Content-Type: application/json; charset=UTF-8
+Date: Tue, 22 Aug 2023 13:26:37 GMT
+
+[
+    {
+        "address": "602 Sommers Parkway, Norfolk, VA 23520",
+        "customerId": "44f82d9d-b0a6-49b2-ac04-cb05b4cbf189",
+        "emailAddress": "magna.Phasellus@Phasellus.net",
+        "firstName": "Brock",
+        "lastName": "Case",
+        "phoneNumber": "(544) 534-1984"
+    }
+]
+```
