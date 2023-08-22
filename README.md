@@ -1,6 +1,6 @@
 # microservices-with-golang
 
-A simple microservice with postgres as database
+A simple microservice in go with postgres as database
 
 ## Pre-requisites (for mac OS ventura)
 - Install httpie (https://httpie.org/) for testing the API
@@ -14,16 +14,18 @@ A simple microservice with postgres as database
 
 
 ## Use getting started for creating postgres container
-- Create a dir in your home folder called `postgres-data` under `docker-vols`
-    - `mkdir -p ~/docker-vols/postgres-data`
+- Create a dir in your home folder called `data-postgres-go` under `docker-vols`
+    - `mkdir -p ~/docker-vols/data-postgres-go`
 - Create a postgres container
-    ```docker run -d --rm \
-    --name local-pg \
-    -e POSTGRES_PASSWORD=postgres \
-    -p 5432:5432 \
-    -e PGDATA=/var/lib/postgresql/data/pgdata \
-    -v /Users/<user-name>/docker-vols/data-postgres-go:/var/lib/postgresql/data \
-    postgres```
+    ```shell
+    docker run -d --rm \
+        --name local-pg \
+        -e POSTGRES_PASSWORD=postgres \
+        -p 5432:5432 \
+        -e PGDATA=/var/lib/postgresql/data/pgdata \
+        -v /Users/<user-name>/docker-vols/data-postgres-go:/var/lib/postgresql/data \
+    postgres
+    ```
 - Login via psql
     - `docker exec -it local-pg psql -U postgres`
 - Create database schema via schema.sql
@@ -38,7 +40,7 @@ A simple microservice with postgres as database
     - `http :8080/readiness`
     - `http :8080/liveness`
 - Expected output
-    ```
+    ```shell
     HTTP/1.1 200 OK
     Content-Length: 16
     Content-Type: application/json; charset=UTF-8
