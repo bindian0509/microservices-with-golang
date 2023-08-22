@@ -1,0 +1,20 @@
+go get github.com/google/uuid
+go get github.com/jackc/pgpassfile
+go get github.com/jackc/pgservicefile
+go get github.com/jackc/pgx/v5
+go get github.com/jinzhu/inflection
+go get github.com/jinzhu/now
+go get github.com/labstack/echo/v4
+go get github.com/labstack/gommon
+go get github.com/lib/pq
+go get github.com/mattn/go-colorable
+go get github.com/mattn/go-isatty
+go get github.com/valyala/bytebufferpool
+go get github.com/valyala/fasttemplate
+go get golang.org/x/crypto
+go get golang.org/x/net
+go get golang.org/x/sys
+go get golang.org/x/text
+go get gorm.io/driver/postgres
+go get gorm.io/gorm
+
