@@ -16,11 +16,16 @@ func main() {
 	if err != nil {
 		log.Fatalf("Some error occured. Err: %s", err)
 	}
+	host := os.Getenv("host")
+	user := os.Getenv("user")
+	password := os.Getenv("password")
+	dbname := os.Getenv("dbname")
+	sslMode := os.Getenv("sslmode")
     port, err := strconv.Atoi(os.Getenv("port"))
 	if err != nil {
 		log.Fatalf("failed to convert port to int: %s", err)
 	}
-	db, err := database.NewDatabaseClient(os.Getenv("host"), os.Getenv("user"), os.Getenv("password"), os.Getenv("dbname"), int32(port), os.Getenv("sslmode"))
+	db, err := database.NewDatabaseClient(host, user, password, dbname, int32(port),sslMode)
 	if err != nil {
 		log.Fatalf("failed to initialize Database Client: %s", err)
 	}

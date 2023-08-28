@@ -25,3 +25,4 @@ tsconfig.build.tsbuildinfo
 *.dylib
 __debug_*
 .vscode/
+prod.db.env
