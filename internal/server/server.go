@@ -3,6 +3,7 @@ package server
 import (
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/bindian0509/microservices-with-golang/internal/database"
 	"github.com/bindian0509/microservices-with-golang/internal/models"
@@ -55,12 +56,16 @@ func NewEchoServer(db database.DatabaseClient) Server {
 }
 
 func (s *EchoServer) Start() error {
-	if err := s.echo.Start(":8080"); err != nil && err != http.ErrServerClosed {
+	port := os.Getenv("app_port")
+	if port == "" {
+		port = ":8080"
+	}
+	if err := s.echo.Start(port); err != nil && err != http.ErrServerClosed {
 		log.Fatalf("server shutdown occurred: %s", err)
 		return err
 	}
 	return nil
-}
+}	
 
 func (s *EchoServer) registerRoutes() {
 	s.echo.GET("/readiness", s.Readiness)

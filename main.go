@@ -12,10 +12,14 @@ import (
 
 
 func main() {
-	err := godotenv.Load("db.env")
-	if err != nil {
-		log.Fatalf("Some error occured. Err: %s", err)
+
+	if(os.Getenv("env") == "") {
+		err := godotenv.Load("db.env")
+		if err != nil {
+			log.Fatalf("Some error occured. Err: %s", err)
+		}
 	}
+
 	host := os.Getenv("host")
 	user := os.Getenv("user")
 	password := os.Getenv("password")
