@@ -43,14 +43,9 @@ type Client struct {
 	DB *gorm.DB
 }
 
-func NewDatabaseClient() (DatabaseClient, error) {
+func NewDatabaseClient(host string, user string, password string, dbname string, port int32, sslmode string) (DatabaseClient, error) {
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%d sslmode=%s",
-		"localhost",
-		"postgres",
-		"postgres",
-		"postgres",
-		5432,
-		"disable",
+		host, user, password, dbname, port, sslmode,
 	)
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
 		NamingStrategy: schema.NamingStrategy{
