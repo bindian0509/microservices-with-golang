@@ -26,6 +26,9 @@ func main() {
 	dbname := os.Getenv("dbname")
 	sslMode := os.Getenv("sslmode")
     port, err := strconv.Atoi(os.Getenv("port"))
+
+	log.Printf("host: %s, user: %s, password: %s, dbname: %s, port: %d, sslmode: %s", host, user, password, dbname, port, sslMode)
+
 	if err != nil {
 		log.Fatalf("failed to convert port to int: %s", err)
 	}

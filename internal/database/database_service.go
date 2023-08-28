@@ -3,7 +3,9 @@ package database
 import (
 	"context"
 	"errors"
+	"log"
 	"time"
+
 	"github.com/bindian0509/microservices-with-golang/internal/db_errors"
 	"github.com/bindian0509/microservices-with-golang/internal/models"
 	"github.com/google/uuid"
@@ -15,6 +17,7 @@ func (c Client) GetAllServices(ctx context.Context) ([]models.Service, error) {
 	var services []models.Service
 	result := c.DB.WithContext(ctx).
 		Find(&services)
+	log.Printf("result: %v", services)
 	return services, result.Error
 }
 

@@ -60,12 +60,13 @@ func (s *EchoServer) Start() error {
 	if port == "" {
 		port = ":8080"
 	}
+	log.Printf("Starting server on port %s", port)
 	if err := s.echo.Start(port); err != nil && err != http.ErrServerClosed {
 		log.Fatalf("server shutdown occurred: %s", err)
 		return err
 	}
 	return nil
-}	
+}
 
 func (s *EchoServer) registerRoutes() {
 	s.echo.GET("/readiness", s.Readiness)
@@ -103,6 +104,7 @@ func (s *EchoServer) registerRoutes() {
 
 func (s *EchoServer) Readiness(ctx echo.Context) error {
 	ready := s.DB.Ready()
+	log.Printf("Readiness: %t", ready)
 	if ready {
 		return ctx.JSON(http.StatusOK, models.Health{Status: "OK"})
 	}
@@ -110,5 +112,6 @@ func (s *EchoServer) Readiness(ctx echo.Context) error {
 }
 
 func (s *EchoServer) Liveness(ctx echo.Context) error {
+	log.Printf("Liveness: OK")
 	return ctx.JSON(http.StatusOK, models.Health{Status: "OK"})
 }
