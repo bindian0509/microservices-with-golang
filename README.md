@@ -1,4 +1,4 @@
-# microservices-with-golang
+# [microservices-with-golang](https://dev.to/bharatv/microservices-in-go-lang-with-postgres-local-docker-to-render-public-hosting-2hoi)
 
 This project will summarize the steps to create a microservice using Golang and Postgresql.
 We will be using 4 different data models each implementing CRUD operations.
@@ -9,7 +9,7 @@ The structure of the project will be like -
 - `internal/db_errors` - This will contain the error handling for the database.
 - `internal/server` - This will contain the server and the main function.
 
-Elaborated schema for the project using E-R diagram 
+Elaborated schema for the project using E-R diagram
 
 <img width="1353" alt="E-R Diagram" src="https://github.com/bindian0509/microservices-with-golang/assets/346620/906249d8-7b74-4183-aa9d-8e53e94111fe">
 
@@ -232,3 +232,4 @@ Date: Tue, 22 Aug 2023 13:26:37 GMT
 - Once the web service is created you can see the logs and the application running on the url provided by render.com
     - My cluster https://microservices-with-golang.onrender.com/liveness (liveness probe)
 
+Link to my blog on DEV community - https://dev.to/bharatv/microservices-in-go-lang-with-postgres-local-docker-to-render-public-hosting-2hoi 
