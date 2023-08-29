@@ -3,6 +3,7 @@ FROM golang:1.21-alpine AS dependencies
 WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
+RUN apk add --no-cache httpie
 
 FROM dependencies AS build
 COPY . ./
