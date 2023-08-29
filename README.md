@@ -1,7 +1,17 @@
 # microservices-with-golang
 
-A simple microservice in go with postgres as database
+This project will summarize the steps to create a microservice using golang and postgresql.
+We will be using 4 different data models each implement CRUD operations.
+The structure of the project will be like -
 
+- `internal/database` - This will contain the database connection and the schema and data files.
+- `internal/models` - This will contain the data models.
+- `internal/db_errors` - This will contain the error handling for the database.
+- `internal/server` - This will contain the server and the main function.
+
+We will start running this project on local, following are the depenedencies we will be using, along with the steps to run your project on local.
+
+Link to my github repo for the code - https://github.com/bindian0509/microservices-with-golang
 ## Pre-requisites (for mac OS ventura)
 - Install httpie (https://httpie.org/) for testing the API
     - `brew install httpie`
@@ -33,7 +43,29 @@ A simple microservice in go with postgres as database
 - Insert data to the database via data.sql
     - `psql -U postgres -f data.sql`
 
-## Tesing Microservices
+## Setting up the go project
+- Create a directory called `microservices-with-golang` in your home folder
+    - `mkdir -p ~/microservices-with-golang`
+    - `cd ~/microservices-with-golang`
+- Use go mod init to create a go module
+    - `go mod init github.com/<github-username>/microservices-with-golang`
+- Use go mod tidy to download the dependencies
+    - `go mod tidy`
+- To start the project run
+    - `go run main.go`
+voila you have your project up and running
+```shell
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.11.1
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:8080
+```
+## Testing Microservices
 ### Checking the database connection and liveness probe
 - To start the server
     - `go run main.go`
@@ -41,7 +73,7 @@ A simple microservice in go with postgres as database
     - `http :8080/readiness`
     - `http :8080/liveness`
 - Expected output
-    ```shell
+```shell
     HTTP/1.1 200 OK
     Content-Length: 16
     Content-Type: application/json; charset=UTF-8
@@ -50,7 +82,7 @@ A simple microservice in go with postgres as database
     {
         "status": "OK"
     }
-    ```
+```
 ### Testing Get All customer API endpoint (GET)
 - To get all customers
     - `http :8080/customers`
@@ -159,3 +191,40 @@ Date: Tue, 22 Aug 2023 13:26:37 GMT
     Content-Length: 0
     Date: Fri, 25 Aug 2023 19:31:23 GMT
 ```
+
+## Running the same project with docker image (using Dockerfile)
+
+- Step 1: Build the docker image for the application
+    - `docker build -t microservices-with-golang .`
+- Step 2: Run the docker image
+    - `docker run -e env=docker --env-file db.docker.env --network host --name microservices-with-golang-app microservices-with-golang`
+- Step 3: Since this container is not exposed to outside world we can login inside it and test the API
+    - `docker exec -it microservices-with-golang-app sh`
+    - `http :8080/liveness` (this will work fine since the docker file already has apk add httpie)
+
+## Production release of the application using [Render]((https://render.com/)) free tiers
+
+- Sign up for render.com using github or other options
+- At first we need to spinup a database service (PostgreSQL)
+    - Click on create a new database
+    - Select the free tier
+    - Select the region
+    - Select the database name
+    - Select the database password
+    - Click on create database
+- Use psql command option to be copied and dump the files to prod db via following commands
+    - `PGPASSWORD=<your-db-password> psql -h xxx-a.singapore-postgres.render.com -U <user_name> <db_name> < schema.sql`
+    - `PGPASSWORD=<your-db-password> psql -h xxx-a.singapore-postgres.render.com -U <user_name> <db_name> < data.sql`
+- Create a new web service
+    - Select the github repo
+    - Select the branch
+    - Select the docker file path
+    - Select the port
+    - Select the environment variables
+        - Refer to `db.env` file for list of args
+        - `sslmode=require` is for production db cluster
+    - Select the free tier
+    - Click on create web service
+- Once the web service is created you can see the logs and the application running on the url provided by render.com
+    - My cluster https://microservices-with-golang.onrender.com/liveness (liveness probe)
+
