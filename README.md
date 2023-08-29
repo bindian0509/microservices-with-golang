@@ -1,7 +1,7 @@
 # microservices-with-golang
 
-This project will summarize the steps to create a microservice using golang and postgresql.
-We will be using 4 different data models each implement CRUD operations.
+This project will summarize the steps to create a microservice using Golang and Postgresql.
+We will be using 4 different data models each implementing CRUD operations.
 The structure of the project will be like -
 
 - `internal/database` - This will contain the database connection and the schema and data files.
@@ -9,7 +9,11 @@ The structure of the project will be like -
 - `internal/db_errors` - This will contain the error handling for the database.
 - `internal/server` - This will contain the server and the main function.
 
-We will start running this project on local, following are the depenedencies we will be using, along with the steps to run your project on local.
+Elaborated schema for the project using E-R diagram 
+
+<img width="1353" alt="E-R Diagram" src="https://github.com/bindian0509/microservices-with-golang/assets/346620/906249d8-7b74-4183-aa9d-8e53e94111fe">
+
+The following are dependencies we will be using, along with the steps to run your project locally.
 
 Link to my github repo for the code - https://github.com/bindian0509/microservices-with-golang
 ## Pre-requisites (for mac OS ventura)
@@ -23,7 +27,7 @@ Link to my github repo for the code - https://github.com/bindian0509/microservic
     - `brew install go`
 
 
-## Use getting started for creating postgres container
+## Use getting started for creating Postgres container
 - Create a dir in your home folder called `data-postgres-go` under `docker-vols`
     - `mkdir -p ~/docker-vols/data-postgres-go`
 - Create a postgres container
