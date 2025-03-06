@@ -5,11 +5,15 @@ docker run -d --rm \
     -e PGDATA=/var/lib/postgresql/data/pgdata \
     -v /Users/bharatverma/docker-vols/data-postgres-go:/var/lib/postgresql/data \
     postgres
+    
+# insert data to postgres
+docker exec -i local-pg psql -U postgres < schema.sql
+docker exec -i local-pg psql -U postgres < data.sql
 
 docker exec -it local-pg /bin/bash
 
 #inside container
 psql -U postgres
 
-#show  all tables for wisdom db 
+#show  all tables for wisdom db
 \dt wisdom.*
