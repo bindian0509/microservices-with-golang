@@ -1,0 +1,5 @@
+ALTER TABLE "products" DROP COLUMN "vendor_id";
+DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS services;
+DROP TABLE IF EXISTS customers;
+DROP TABLE IF EXISTS vendors;
