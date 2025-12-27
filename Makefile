@@ -21,4 +21,10 @@ migratedown:
 migratedown1:
 	migrate -path db/migration -database "$(DB_URL)" -verbose down 1
 
-.PHONY: postgres createdb dropdb migrateup migrateup1 migratedown
+deploy:
+	./deploy-local.sh
+
+server:
+	go run main.go
+
+.PHONY: postgres createdb dropdb migrateup migrateup1 migratedown deploy server
